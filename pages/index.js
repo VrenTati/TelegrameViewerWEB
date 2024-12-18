@@ -9,7 +9,6 @@ export default function Home() {
   const [password, setPassword] = useState("");
   const [isRegistering, setIsRegistering] = useState(false);
 
-  // Стан для помилок
   const [errors, setErrors] = useState({
     email: "",
     password: "",
@@ -18,12 +17,10 @@ export default function Home() {
   const [successMessage, setSuccessMessage] = useState("");
 
   const handleAuth = async () => {
-    // Скидаємо попередні помилки
     setErrors({ email: "", password: "", general: "" });
     setSuccessMessage("");
 
     try {
-      // Перевірка на порожні поля
       if (!email) {
         setErrors((prev) => ({ ...prev, email: "Email is required" }));
         return;
@@ -49,7 +46,6 @@ export default function Home() {
         setSuccessMessage("Registration successful! Please login.");
         setIsRegistering(false);
 
-        // Автоматичне закриття успішного повідомлення через 3 секунди
         setTimeout(() => {
           setSuccessMessage("");
         }, 3000);
@@ -57,7 +53,6 @@ export default function Home() {
     } catch (err) {
       const errorDetail = err.response?.data?.detail || "Unknown error";
 
-      // Якщо помилка стосується конкретних полів, додаємо їх до помилок
       if (err.response?.data?.detail?.includes("Email already registered")) {
         setErrors((prev) => ({
           ...prev,

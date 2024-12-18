@@ -10,7 +10,6 @@ export default function Chats() {
   const [activeChatId, setActiveChatId] = useState(null);
   const [activeChatName, setActiveChatName] = useState("");
 
-  // Функція для завантаження чатів
   const fetchChats = async () => {
     const token = localStorage.getItem("token");
     const phone = localStorage.getItem("phone");
@@ -20,7 +19,6 @@ export default function Chats() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      // Перевірка на наявність чатів
       if (res.data && res.data.data && res.data.data.chats) {
         setChats(res.data.data.chats);
       } else {
@@ -34,7 +32,6 @@ export default function Chats() {
     }
   };
 
-  // Функція для завантаження повідомлень з чату
   const fetchMessages = async (chatId, chatName) => {
     const token = localStorage.getItem("token");
     const phone = localStorage.getItem("phone");
@@ -46,7 +43,6 @@ export default function Chats() {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      // Перевірка на наявність повідомлень
       if (res.data && res.data.data && res.data.data.messages) {
         setMessages(res.data.data.messages);
         setActiveChatId(chatId);
@@ -62,14 +58,12 @@ export default function Chats() {
     }
   };
 
-  // Вихід з аккаунту
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("phone");
     router.push("/");
   };
 
-  // Вихід з Telegram
   const handleTelegramLogout = async () => {
     const token = localStorage.getItem("token");
     const phone = localStorage.getItem("phone");
@@ -81,7 +75,7 @@ export default function Chats() {
       );
       alert(res.data.message);
       localStorage.removeItem("phone");
-      router.push("/"); // Перехід на головну сторінку
+      router.push("/connect");
     } catch (err) {
       alert(
         "Failed to logout from Telegram: " + err.response?.data?.detail ||
@@ -90,7 +84,6 @@ export default function Chats() {
     }
   };
 
-  // Завантаження чатів при завантаженні сторінки
   useEffect(() => {
     if (!localStorage.getItem("token")) router.push("/");
     fetchChats();
@@ -98,7 +91,6 @@ export default function Chats() {
 
   return (
     <div className="flex h-screen bg-gradient-to-r from-green-400 to-blue-500">
-      {/* Список чатів */}
       <div className="w-1/3 bg-white shadow-lg border-r border-gray-300 overflow-y-auto">
         <h2 className="text-xl font-bold p-4 bg-green-600 text-white">Chats</h2>
         <ul>
@@ -130,7 +122,6 @@ export default function Chats() {
         </div>
       </div>
 
-      {/* Вікно повідомлень */}
       <div className="w-2/3 flex flex-col">
         {activeChatId ? (
           <>

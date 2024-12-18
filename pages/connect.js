@@ -13,7 +13,6 @@ export default function ConnectTelegram() {
 
   const connectTelegram = async () => {
     const token = localStorage.getItem("token");
-    // Скидаємо попередні помилки
     setErrors({ phone: "", code: "", general: "" });
     setSuccessMessage("");
 
@@ -33,7 +32,6 @@ export default function ConnectTelegram() {
 
   const sendTelegramCode = async () => {
     const token = localStorage.getItem("token");
-    // Скидаємо попередні помилки
     setErrors({ phone: "", code: "", general: "" });
     setSuccessMessage("");
 
@@ -61,14 +59,12 @@ export default function ConnectTelegram() {
           Connect Telegram
         </h1>
 
-        {/* Вспливаюче успішне повідомлення */}
         {successMessage && (
           <div className="p-3 mb-4 text-green-700 bg-green-200 border border-green-500 rounded">
             {successMessage}
           </div>
         )}
 
-        {/* Загальна помилка */}
         {errors.general && (
           <div className="p-3 mb-4 text-red-700 bg-red-200 border border-red-500 rounded">
             {errors.general}
