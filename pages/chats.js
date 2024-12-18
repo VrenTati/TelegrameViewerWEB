@@ -73,10 +73,10 @@ export default function Chats() {
         null,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      alert(res.data.message);
       localStorage.removeItem("phone");
       router.push("/connect");
     } catch (err) {
+      console.log(err)
       alert(
         "Failed to logout from Telegram: " + err.response?.data?.detail ||
           "Unknown error"
