@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Telegram Frontend
+
+This repository contains the frontend application for managing Telegram chats. The project is built using **Next.js** and provides an intuitive interface for viewing chats and messages, as well as managing user connections to Telegram.
+
+## Features
+
+- **User Authentication**: Secure login/logout functionality.
+- **Telegram Integration**: Connect your Telegram account and view your chats and messages.
+- **Chat Interface**: Navigate through your chats and view messages in real time.
+
+## Prerequisites
+
+- **Node.js**: Version 14 or higher
+- **npm** or **yarn**: For managing dependencies
+- A running backend service compatible with the frontend. (See [Backend Repository]([#](https://github.com/VrenTati/TelegramViewerAPI)) for more details.)
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/VrenTati/TelegrameViewerWEB.git
+cd TelegrameViewerWEB
+```
+
+### 2. Install Dependencies
+
+Using npm:
+```bash
+npm install
+```
+
+Or using yarn:
+```bash
+yarn install
+```
+
+### 3. Environment Variables
+
+Create a `.env.local` file in the root of the project and configure the following variables:
+
+```env
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
+```
+
+### 4. Run the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Or using yarn:
+```bash
+yarn dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The application will be available at `http://localhost:3000`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Key Pages
 
-## Learn More
+### `/` (Home)
+- User authentication page for logging in.
 
-To learn more about Next.js, take a look at the following resources:
+### `/connect`
+- Connect your Telegram account by entering your phone number and verification code.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### `/chats`
+- View your Telegram chats and messages.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Scripts
 
-## Deploy on Vercel
+- `dev`: Start the development server.
+- `build`: Build the application for production.
+- `start`: Start the production server.
+- `lint`: Run ESLint to check for code issues.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## API Endpoints
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The frontend interacts with the backend using the following API endpoints:
+
+- **`POST /auth/register`**: Register a new user.
+- **`POST /auth/login`**: Log in a user and retrieve a token.
+- **`GET /telegram/chats`**: Fetch user chats.
+- **`GET /telegram/messages`**: Fetch messages for a specific chat.
+- **`POST /telegram/logout`**: Disconnect Telegram account.
+- **`POST /auth/logout`**: Logout from account.
+
+
