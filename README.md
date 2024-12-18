@@ -12,7 +12,7 @@ This repository contains the frontend application for managing Telegram chats. T
 
 - **Node.js**: Version 14 or higher
 - **npm** or **yarn**: For managing dependencies
-- A running backend service compatible with the frontend. (See [Backend Repository]([#](https://github.com/VrenTati/TelegramViewerAPI)) for more details.)
+- A running backend service compatible with the frontend. (See [Backend Repository](https://github.com/VrenTati/TelegramViewerAPI)) for more details.)
 
 ## Getting Started
 
