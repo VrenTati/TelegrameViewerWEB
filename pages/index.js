@@ -51,21 +51,29 @@ export default function Home() {
         }, 3000);
       }
     } catch (err) {
-      const errorDetail = err.response?.data?.detail || "Unknown error";
+      let errorDetail = err.response?.data?.detail || "Unknown error";
 
-      if (err.response?.data?.detail?.includes("Email already registered")) {
-        setErrors((prev) => ({
-          ...prev,
-          email: "Email is already registered.",
-        }));
-      } else if (err.response?.data?.detail?.includes("Invalid credentials")) {
-        setErrors((prev) => ({
-          ...prev,
-          general: "Invalid email or password.",
-        }));
-      } else {
-        setErrors((prev) => ({ ...prev, general: String(errorDetail) }));
+      if (Array.isArray(errorDetail)) {
+        errorDetail = errorDetail
+          .map((item) => {
+            if (typeof item === "object" && item.msg) {
+              return item.msg;
+            }
+            return JSON.stringify(item);
+          })
+          .join(", ");
+      } else if (typeof errorDetail === "object") {
+        if (errorDetail.msg) {
+          errorDetail = errorDetail.msg; 
+        } else {
+          errorDetail = JSON.stringify(errorDetail);
+        }
+      } else if (typeof errorDetail !== "string") {
+        errorDetail = String(errorDetail);
       }
+      console.log(errorDetail)
+      
+      setErrors((prev) => ({ ...prev, general: errorDetail }));
     }
   };
 
